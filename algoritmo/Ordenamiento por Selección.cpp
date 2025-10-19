@@ -1,48 +1,54 @@
 #include <iostream>
 #include <vector>
-#include <algorithm> // Para std::swap
+#include <algorithm> // Necesario para std::swap
 
-// Función para imprimir el vector
-void imprimir_vector(const std::vector<int>& vec) {
-    std::cout << "[ ";
-    for (int x : vec) {
-        std::cout << x << " ";
-    }
-    std::cout << "]" << std::endl;
-}
-
-// Algoritmo de Ordenamiento por Selección
-void ordenamiento_seleccion(std::vector<int>& arr) {
-    int n = arr.size();
-
-    // Recorrer el arreglo (n-1 veces)
+// Función que implementa el algoritmo de Ordenamiento por Selección
+void ordenamiento_por_seleccion(std::vector<int>& datos) {
+    int n = datos.size();
+    
+    // Bucle externo: Itera a través de todos los elementos para colocarlos en su posición correcta.
     for (int i = 0; i < n - 1; ++i) {
-        // Encontrar el índice del elemento mínimo en el resto del arreglo
+        
+        // Asume que el elemento actual es el mínimo.
         int indice_minimo = i;
+        
+        // Bucle interno: Busca el elemento más pequeño en el resto de la lista desordenada.
         for (int j = i + 1; j < n; ++j) {
-            if (arr[j] < arr[indice_minimo]) {
+            
+            // Si encuentra un elemento más pequeño, actualiza el índice_minimo.
+            if (datos[j] < datos[indice_minimo]) {
                 indice_minimo = j;
             }
         }
         
-        // Intercambiar el elemento mínimo encontrado con el elemento en la posición 'i'
+        // Intercambia el elemento mínimo encontrado con el elemento actual (datos[i]).
+        // Esto coloca el mínimo en su posición final ordenada.
         if (indice_minimo != i) {
-            std::swap(arr[i], arr[indice_minimo]);
+            std::swap(datos[i], datos[indice_minimo]);
         }
     }
 }
 
 int main() {
-    std::vector<int> datos = {29, 10, 14, 37, 13};
+    // Definición de los datos desordenados
+    std::vector<int> numeros = {64, 25, 12, 22, 11};
     
-    std::cout << "--- Algoritmo de Ordenamiento por Selección ---" << std::endl;
-    std::cout << "Vector Original: ";
-    imprimir_vector(datos);
-
-    ordenamiento_seleccion(datos);
-
-    std::cout << "Vector Ordenado: ";
-    imprimir_vector(datos);
+    std::cout << "Vector original: ";
+    for (int n : numeros) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
     
+    // Ejecución del algoritmo
+    ordenamiento_por_seleccion(numeros);
+    
+    // Mostrar el resultado
+    std::cout << "Vector ordenado con Selection Sort: ";
+    for (int n : numeros) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl; 
+    // Output: 11 12 22 25 64
+
     return 0;
 }
