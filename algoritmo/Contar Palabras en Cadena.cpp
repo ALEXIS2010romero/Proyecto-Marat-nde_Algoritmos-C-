@@ -1,15 +1,11 @@
 #include <iostream>
-#include <string>
+#include <sstream>
 using namespace std;
 int main(){
-    string s;
-    cout << "Ingrese una frase: ";
-    getline(cin,s);
-    int palabras=0;
-    bool enPalabra=false;
-    for(char c:s){
-        if(isspace(c)) enPalabra=false;
-        else if(!enPalabra){palabras++; enPalabra=true;}
-    }
-    cout << "Cantidad de palabras: " << palabras;
+    string s; getline(cin, s);
+    stringstream ss(s);
+    string palabra;
+    int contador=0;
+    while(ss >> palabra) contador++;
+    cout << "Número de palabras: " << contador;
 }

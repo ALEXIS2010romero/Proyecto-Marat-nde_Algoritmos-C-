@@ -2,38 +2,19 @@
 using namespace std;
 
 int main() {
-    int n, x;
-    cout << "Ingrese el tamaño del arreglo: ";
-    cin >> n;
+    int numero, invertido = 0;
 
-    int arr[n];
-    cout << "Ingrese los elementos ORDENADOS del arreglo: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    cout << "Ingrese un número entero: ";
+    cin >> numero;
+
+    // Algoritmo para invertir el número
+    while (numero != 0) {
+        int digito = numero % 10;        // Obtiene el último dígito
+        invertido = invertido * 10 + digito; // Lo agrega al número invertido
+        numero /= 10;                    // Elimina el último dígito
     }
 
-    cout << "Ingrese el número a buscar: ";
-    cin >> x;
-
-    int inicio = 0, fin = n - 1;
-    bool encontrado = false;
-
-    while (inicio <= fin) {
-        int medio = (inicio + fin) / 2;
-        if (arr[medio] == x) {
-            cout << "Elemento encontrado en la posición: " << medio << endl;
-            encontrado = true;
-            break;
-        } else if (arr[medio] < x) {
-            inicio = medio + 1;
-        } else {
-            fin = medio - 1;
-        }
-    }
-
-    if (!encontrado) {
-        cout << "Elemento no encontrado." << endl;
-    }
+    cout << "El número invertido es: " << invertido << endl;
 
     return 0;
 }
