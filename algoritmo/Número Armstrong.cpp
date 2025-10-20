@@ -1,17 +1,13 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 int main(){
-    int n;
-    cout << "Ingrese un número: ";
-    cin >> n;
-    int original = n, suma = 0;
-    int digitos = to_string(n).size();
-    while(n > 0){
-        int dig = n % 10;
-        suma += pow(dig, digitos);
-        n /= 10;
+    int n, original; cin >> n;
+    original = n;
+    int inverso=0;
+    while(n!=0){
+        inverso = inverso*10 + n%10;
+        n/=10;
     }
-    if(suma == original) cout << "Número Armstrong";
-    else cout << "No es Armstrong";
+    if(original==inverso) cout << "Número capicúa";
+    else cout << "No es capicúa";
 }
