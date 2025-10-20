@@ -1,27 +1,13 @@
 #include <iostream>
 using namespace std;
-
-int main() {
-    int numero, invertido = 0, original;
-
-    cout << "Ingrese un número entero: ";
-    cin >> numero;
-
-    original = numero; // Guardamos el número original
-
-    // Algoritmo para invertir el número
-    while (numero != 0) {
-        int digito = numero % 10;
-        invertido = invertido * 10 + digito;
-        numero /= 10;
+int main(){
+    int n, original; cin >> n;
+    original = n;
+    int inverso=0;
+    while(n!=0){
+        inverso = inverso*10 + n%10;
+        n/=10;
     }
-
-    // Verificamos si es capicúa
-    if (original == invertido)
-        cout << original << " es un número capicúa." << endl;
-    else
-        cout << original << " no es un número capicúa." << endl;
-
-    return 0;
+    if(original==inverso) cout << "Número capicúa";
+    else cout << "No es capicúa";
 }
-
