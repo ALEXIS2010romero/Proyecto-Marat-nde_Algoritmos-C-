@@ -1,60 +1,45 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
-// Función que implementa el algoritmo de Búsqueda Binaria
-int busqueda_binaria(const std::vector<int>& datos, int objetivo) {
+int busqueda_binaria(const std::vector<int>& arr, int objetivo) {
     int izquierda = 0;
-    int derecha = datos.size() - 1; // Último índice del vector
+    int derecha = arr.size() - 1;
 
-    // Mientras el espacio de búsqueda sea válido (izquierda no haya superado a derecha)
     while (izquierda <= derecha) {
-        
-        // 1. Calcular el índice medio
-        // Se usa esta forma para evitar un posible desbordamiento (overflow)
         int medio = izquierda + (derecha - izquierda) / 2;
 
-        // 2. Comparación principal: Se encontró el objetivo
-        if (datos[medio] == objetivo) {
-            return medio; // Devolvemos el índice donde se encuentra
-        } 
+        if (arr[medio] == objetivo) {
+            return medio; // ¡Encontrado!
+        }
         
-        // 3. Si el elemento medio es menor que el objetivo, 
-        // el objetivo debe estar en la mitad derecha.
-        else if (datos[medio] < objetivo) {
-            izquierda = medio + 1; // Descartamos la mitad izquierda
+        // Si el objetivo es mayor, descartar la mitad izquierda
+        if (arr[medio] < objetivo) {
+            izquierda = medio + 1;
         } 
-        
-        // 4. Si el elemento medio es mayor que el objetivo, 
-        // el objetivo debe estar en la mitad izquierda.
+        // Si el objetivo es menor, descartar la mitad derecha
         else {
-            derecha = medio - 1; // Descartamos la mitad derecha
+            derecha = medio - 1;
         }
     }
 
-    // Si el bucle termina, el objetivo no fue encontrado
-    return -1; 
+    return -1; // No encontrado
 }
 
 int main() {
-    // ⚠️ EL VECTOR DEBE ESTAR ORDENADO PARA QUE LA BÚSQUEDA BINARIA FUNCIONE ⚠️
-    std::vector<int> numeros_ordenados = {5, 12, 23, 45, 60, 88, 100};
-    int valor_a_buscar = 60;
-
-    int indice_encontrado = busqueda_binaria(numeros_ordenados, valor_a_buscar);
-
-    if (indice_encontrado != -1) {
-        std::cout << "El valor " << valor_a_buscar 
-                  << " fue encontrado en el índice: " << indice_encontrado 
-                  << std::endl; // Output: 4
-    } else {
-        std::cout << "El valor " << valor_a_buscar 
-                  << " no fue encontrado." << std::endl;
-    }
+    std::vector<int> datos = {10, 25, 33, 40, 51, 67, 72, 80};
+    int valor_buscar = 51;
     
-    // Ejemplo de un valor no existente
-    valor_a_buscar = 99;
-    indice_encontrado = busqueda_binaria(numeros_ordenados, valor_a_buscar);
-    std::cout << "El valor 99 fue encontrado en el índice: " << indice_encontrado << std::endl; // Output: -1
+    std::cout << "--- Búsqueda Binaria ---" << std::endl;
+    std::cout << "Buscando " << valor_buscar << " en el vector ordenado." << std::endl;
+
+    int indice = busqueda_binaria(datos, valor_buscar);
+
+    if (indice != -1) {
+        std::cout << "Resultado: El elemento fue encontrado en el índice: " << indice << std::endl;
+    } else {
+        std::cout << "Resultado: El elemento no se encontró." << std::endl;
+    }
 
     return 0;
 }
